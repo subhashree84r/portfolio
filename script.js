@@ -889,8 +889,14 @@ function openProjectModalData(project, btn) {
       li.textContent = project.description;
       modalDesc.appendChild(li);
     }
-    modalDemoBtn.href = project.demoLink || '#';
-    modalSourceBtn.href = project.sourceLink || '#';
+        const formatUrl = (url) => {
+      if (!url || url === '#') return '#';
+      if (!/^https?:\/\//i.test(url)) return 'https://' + url;
+      return url;
+    };
+    modalDemoBtn.href = formatUrl(project.demoLink);
+    modalSourceBtn.href = formatUrl(project.sourceLink);
+
     
     modalTags.innerHTML = '';
     if (project.tags) {
