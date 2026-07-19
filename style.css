@@ -527,6 +527,23 @@ input:checked + .slider:before {
   font-family: var(--font-btn);
   color: var(--text-dark);
   font-weight: 500;
+  min-width: 260px;
+  text-align: center;
+}
+.cursor {
+  display: inline-block;
+  margin-left: 2px;
+  font-weight: 600;
+  animation: blink 0.7s infinite;
+}
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 .hero-desc {
   font-size: 1.125rem;
@@ -2424,7 +2441,7 @@ body.admin-mode .cert-card:hover .edit-cert-btn {
   .cert-info {
     display: grid;
     grid-template-columns: 1fr auto;
-    grid-template-areas: 
+    grid-template-areas:
       "title button"
       "issuer issuer"
       "meta meta";
