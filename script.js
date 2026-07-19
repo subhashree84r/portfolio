@@ -1217,3 +1217,41 @@ if(closeAddCertModalBtn) closeAddCertModalBtn.addEventListener('click', handleMo
 if(addCertModal) addCertModal.addEventListener('click', (e) => {
   if (e.target === addCertModal) handleModalClose();
 });
+
+// --- Typewriter Effect ---
+const typewriterWords = ["Fullstack Developer", "MCA Postgraduate Student", "Python Developer"];
+let typewriterIndex = 0;
+let typewriterCharIndex = 0;
+let typewriterDeleting = false;
+
+function typeWriterEffect() {
+  const target = document.getElementById("typewriter-text");
+  if (!target) return;
+  
+  const currentWord = typewriterWords[typewriterIndex];
+  
+  if (typewriterDeleting) {
+    target.textContent = currentWord.substring(0, typewriterCharIndex - 1);
+    typewriterCharIndex--;
+  } else {
+    target.textContent = currentWord.substring(0, typewriterCharIndex + 1);
+    typewriterCharIndex++;
+  }
+  
+  let typingSpeed = typewriterDeleting ? 50 : 100;
+  
+  if (!typewriterDeleting && target.textContent === currentWord) {
+    typingSpeed = 2000;
+    typewriterDeleting = true;
+  } else if (typewriterDeleting && target.textContent === "") {
+    typewriterDeleting = false;
+    typewriterIndex = (typewriterIndex + 1) % typewriterWords.length;
+    typingSpeed = 500;
+  }
+  
+  setTimeout(typeWriterEffect, typingSpeed);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  setTimeout(typeWriterEffect, 1000);
+});
